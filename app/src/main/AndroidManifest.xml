@@ -38,6 +38,7 @@
         <!-- Registro de actividades -->
         <activity android:name=".RegisterActivity" />
         <activity android:name=".MainActivity" />
+        <activity android:name=".ContactListActivity" />
 
 
     </application>
