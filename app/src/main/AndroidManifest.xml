@@ -39,6 +39,7 @@
         <activity android:name=".RegisterActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".ContactListActivity" />
+        <activity android:name=".FriendRequestsActivity" />
 
 
     </application>
