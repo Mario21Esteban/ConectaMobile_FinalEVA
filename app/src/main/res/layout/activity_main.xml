@@ -6,7 +6,7 @@
     android:padding="16dp"
     android:gravity="center">
 
-    <!-- Mensaje de bienvenida -->
+    <!-- Mensaje de Bienvenida -->
     <TextView
         android:id="@+id/welcome_message"
         android:layout_width="wrap_content"
@@ -14,16 +14,31 @@
         android:text="Bienvenido a ConectaMobile"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:padding="16dp"/>
+        android:padding="16dp" />
 
-    <!-- Botón de logout -->
+    <!-- Botón para ir a Contactos -->
+    <Button
+        android:id="@+id/go_to_contacts_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ir a Contactos"
+        android:layout_marginTop="20dp" />
+
+    <!-- Botón para ir a Solicitudes Pendientes -->
+    <Button
+        android:id="@+id/go_to_requests_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ir a Solicitudes Pendientes"
+        android:layout_marginTop="20dp" />
+
+    <!-- Botón de Cerrar Sesión -->
     <Button
         android:id="@+id/logout_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Cerrar Sesión"
-        android:layout_marginTop="20dp"
-        android:onClick="logoutUser"/>
-
+        android:layout_marginTop="20dp" />
 </LinearLayout>
+
 

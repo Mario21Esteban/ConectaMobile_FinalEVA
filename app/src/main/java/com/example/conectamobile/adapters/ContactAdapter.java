@@ -99,6 +99,9 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
                         }
                     });
         });
+
+
+
     }
 
 

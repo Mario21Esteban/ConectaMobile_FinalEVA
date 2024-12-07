@@ -9,11 +9,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText emailInput, passwordInput;
     private Button loginButton, registerRedirectButton;
-    private FirebaseAuth auth;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +28,7 @@ public class LoginActivity extends AppCompatActivity {
         registerRedirectButton = findViewById(R.id.registerRedirectButton);
 
         // Inicializar Firebase Auth
-        auth = FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
 
         // Botón para iniciar sesión
         loginButton.setOnClickListener(v -> loginUser());
@@ -49,15 +50,17 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         // Iniciar sesión con Firebase Authentication
-        auth.signInWithEmailAndPassword(email, password)
+        mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
-                        Log.d("Auth", "Inicio de sesión exitoso");
-                        // Redirigir a MainActivity
-                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                        finish();
+                        // Redirigir a MainActivity después de iniciar sesión
+                        FirebaseUser user = mAuth.getCurrentUser();
+                        if (user != null) {
+                            Toast.makeText(this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                            finish(); // Finalizar LoginActivity
+                        }
                     } else {
-                        Log.e("Auth", "Error al iniciar sesión", task.getException());
                         Toast.makeText(this, "Error: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });

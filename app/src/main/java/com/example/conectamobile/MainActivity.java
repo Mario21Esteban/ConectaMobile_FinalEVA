@@ -16,6 +16,7 @@ import com.google.firebase.database.core.view.View;
 public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
+    private Button logoutButton, goToContactsButton, goToRequestsButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,25 +29,35 @@ public class MainActivity extends AppCompatActivity {
         // Verificar si el usuario está autenticado
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
-        if (currentUser == null) {
-            // Si no hay usuario, redirigir al login
-            startActivity(new Intent(MainActivity.this, LoginActivity.class));
-            finish();
-        } else {
-            // Si el usuario está autenticado, mostrar lista de contactos
-            startActivity(new Intent(MainActivity.this, ContactListActivity.class));
-            finish();
-        }
+
+        // Vincular vistas
+        logoutButton = findViewById(R.id.logout_button);
+        goToContactsButton = findViewById(R.id.go_to_contacts_button);
+        goToRequestsButton = findViewById(R.id.go_to_requests_button);
+
+        // Configurar botón de cerrar sesión
+        logoutButton.setOnClickListener(v -> {
+            mAuth.signOut();
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish(); // Finalizar MainActivity
+        });
+
+        // Configurar botón para ir a la lista de contactos
+        goToContactsButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, ContactListActivity.class);
+            startActivity(intent);
+        });
+
+        // Configurar botón para ir a la pantalla de solicitudes pendientes
+        goToRequestsButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, FriendRequestsActivity.class);
+            startActivity(intent);
+        });
     }
-
-    public void logoutUser(@SuppressLint("RestrictedApi") View view) {
-        // Cerrar sesión en Firebase
-        mAuth.signOut();
-
-        // Redirigir al login
-        startActivity(new Intent(MainActivity.this, LoginActivity.class));
-        finish();
-    }
-
-
 }
+
+
+
+
+
