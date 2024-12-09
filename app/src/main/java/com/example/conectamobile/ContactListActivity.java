@@ -22,7 +22,17 @@ import com.example.conectamobile.models.Contact;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ContactListActivity extends AppCompatActivity {
+public class ContactListActivity extends BaseActivity {
+
+    @Override
+    protected int getLayoutResourceId() {
+        return R.layout.activity_contact_list; // Layout de la lista de contactos
+    }
+
+    @Override
+    protected int getBottomNavigationMenuItemId() {
+        return R.id.nav_contacts; // Elemento seleccionado en el menú
+    }
 
     private EditText searchField;
     private RecyclerView contactsRecyclerView;

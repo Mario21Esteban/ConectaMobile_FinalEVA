@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="16dp"
     android:gravity="center">
@@ -16,29 +17,20 @@
         android:textStyle="bold"
         android:padding="16dp" />
 
-    <!-- Botón para ir a Contactos -->
-    <Button
-        android:id="@+id/go_to_contacts_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Ir a Contactos"
-        android:layout_marginTop="20dp" />
+    <!-- Contenido principal -->
+    <FrameLayout
+        android:id="@+id/main_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
-    <!-- Botón para ir a Solicitudes Pendientes -->
-    <Button
-        android:id="@+id/go_to_requests_button"
-        android:layout_width="wrap_content"
+    <!-- Menú de navegación inferior -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Ir a Solicitudes Pendientes"
-        android:layout_marginTop="20dp" />
-
-    <!-- Botón de Cerrar Sesión -->
-    <Button
-        android:id="@+id/logout_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Cerrar Sesión"
-        android:layout_marginTop="20dp" />
+        android:background="?attr/colorPrimary"
+        app:menu="@menu/bottom_nav_menu" />
 </LinearLayout>
 
 

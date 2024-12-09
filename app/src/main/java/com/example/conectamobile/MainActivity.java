@@ -1,63 +1,53 @@
 package com.example.conectamobile;
 
+
+
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.core.view.View;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
-    private FirebaseAuth mAuth;
-    private Button logoutButton, goToContactsButton, goToRequestsButton;
+    @Override
+    protected int getLayoutResourceId() {
+        return R.layout.activity_main; // Layout principal de esta actividad
+    }
 
+    @Override
+    protected int getBottomNavigationMenuItemId() {
+        return R.id.nav_home; // Elemento seleccionado en el menú
+    }
+    @SuppressLint("NonConstantResourceId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Inicializar Firebase Auth
-        mAuth = FirebaseAuth.getInstance();
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 
-        // Verificar si el usuario está autenticado
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            int id = item.getItemId();
 
-
-        // Vincular vistas
-        logoutButton = findViewById(R.id.logout_button);
-        goToContactsButton = findViewById(R.id.go_to_contacts_button);
-        goToRequestsButton = findViewById(R.id.go_to_requests_button);
-
-        // Configurar botón de cerrar sesión
-        logoutButton.setOnClickListener(v -> {
-            mAuth.signOut();
-            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-            startActivity(intent);
-            finish(); // Finalizar MainActivity
+            if (id == R.id.nav_home) {
+                // Ya estamos en Home
+                return true;
+            } else if (id == R.id.nav_contacts) {
+                // Abrir la lista de contactos
+                startActivity(new Intent(MainActivity.this, ContactListActivity.class));
+                return true;
+            } else if (id == R.id.nav_requests) {
+                // Abrir la lista de solicitudes
+                startActivity(new Intent(MainActivity.this, FriendRequestsActivity.class));
+                return true;
+            } else {
+                return false;
+            }
         });
 
-        // Configurar botón para ir a la lista de contactos
-        goToContactsButton.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, ContactListActivity.class);
-            startActivity(intent);
-        });
-
-        // Configurar botón para ir a la pantalla de solicitudes pendientes
-        goToRequestsButton.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, FriendRequestsActivity.class);
-            startActivity(intent);
-        });
     }
 }
-
-
-
-
-

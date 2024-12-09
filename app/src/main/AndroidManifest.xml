@@ -40,6 +40,7 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".ContactListActivity" />
         <activity android:name=".FriendRequestsActivity" />
+        <activity android:name=".ChatActivity" />
 
 
     </application>

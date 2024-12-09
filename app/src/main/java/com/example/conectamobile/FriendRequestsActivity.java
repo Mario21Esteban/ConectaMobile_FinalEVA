@@ -18,7 +18,17 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FriendRequestsActivity extends AppCompatActivity {
+public class FriendRequestsActivity extends BaseActivity {
+
+    @Override
+    protected int getLayoutResourceId() {
+        return R.layout.activity_friend_requests; // Layout de solicitudes de amistad
+    }
+
+    @Override
+    protected int getBottomNavigationMenuItemId() {
+        return R.id.nav_requests; // Elemento seleccionado en el menú
+    }
 
     private RecyclerView requestsRecyclerView;
     private FriendRequestAdapter requestAdapter;
